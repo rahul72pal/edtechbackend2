@@ -3,7 +3,7 @@ require("dotenv").config();
 
 module.exports.mailSender = async(email , title , body)=>{
   try {
-    console.log(email,title,body);
+    // console.log(email,title,body);
     let transporter = nodemailer.createTransport({
       host:process.env.MAIL_HOST,
       auth:{
@@ -11,7 +11,7 @@ module.exports.mailSender = async(email , title , body)=>{
         pass:process.env.MAIL_PASS
       }
     })
-     console.log(transporter);
+    //  console.log(transporter);
     //send the mail
     let info = await transporter.sendMail({
       from: ` "OTP From study Notion Backend" <muskanpal395@gmail.com>`,
@@ -24,7 +24,7 @@ module.exports.mailSender = async(email , title , body)=>{
     return info;
     
   } catch (error) {
-    console.log(error);
+    console.log("Main Error =",error);
     console.log(error.message);
   }
 }

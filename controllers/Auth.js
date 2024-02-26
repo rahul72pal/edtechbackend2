@@ -169,7 +169,7 @@ module.exports.Singup = async (req,res)=>{
 module.exports.login = async( req,res)=>{
   try {
     const {email , password} = req.body;
-    console.log("LOGIN DATA = ", req);
+    console.log("LOGIN DATA = ", req.body);
 
     //validation 
     if( !email || !password){
@@ -196,7 +196,7 @@ module.exports.login = async( req,res)=>{
         accountType: user.accountType, 
       }
       const token = jwt.sign(payload , process.env.JWT_SECRETE,{
-        expiresIn: "5h",
+        expiresIn: "10h",
       });
       user.token = token;
       user.password = undefined

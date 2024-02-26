@@ -8,6 +8,7 @@ const {paymentEmailsuccessful} = require("../mail/templates/paymentEmailsuccessf
 const {instance} = require('../config/razorpay');
 const crypto = require("crypto");
 const CourseProgress = require("../models/CourseProgress");
+const dotenv = require("dotenv");
 
 
 module.exports.capturePayment = async(req,res)=>{
@@ -60,7 +61,7 @@ module.exports.capturePayment = async(req,res)=>{
     }
 
     try {
-      // console.log("INSTANCE = ",instance);
+      console.log("INSTANCE = ",instance);
       const paymentResponse = await instance.orders.create(options);
       return res.json({
         success: true,
@@ -108,6 +109,7 @@ module.exports.verifySignature =async(req,res)=>{
       })
       }
     
+    console.log("RAZORPAY_SECRET",process.env.RAZORPAY_SECRET);
     let body = razorpay_order_id + "|" + razorpay_payment_id;
     const exceptedSignature = crypto
     .createHmac("sha256", process.env.RAZORPAY_SECRET)
